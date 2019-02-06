@@ -11,6 +11,6 @@ jobs:
 
     steps:
       - checkout
-      - run: bundle install
+      - run: npm run setup
       #- run: npm run setup
       - run: npm run publish
