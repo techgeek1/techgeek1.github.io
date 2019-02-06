@@ -7,6 +7,10 @@ set -e
 
 echo "Started deploying"
 
+# Setup git user
+git config user.email "dummy_email@fake.com"
+git config user.name "Techgeek1"
+
 # Checkout gh-pages branch.
 if [ `git branch | grep gh-pages` ]
 then
