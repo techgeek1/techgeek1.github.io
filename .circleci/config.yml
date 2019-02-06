@@ -10,6 +10,9 @@ jobs:
       - image: circleci/ruby:2.4.1-node
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "b2:92:e6:8e:9c:a8:91:8c:28:cb:6c:67:14:8f:75:ba"
       - checkout
       - run: npm run setup
       #- run: npm run setup
