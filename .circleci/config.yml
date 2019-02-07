@@ -8,8 +8,6 @@ jobs:
     branches:
       only:
         - authoring
-      ignore:
-        - master
 
     docker:
       # specify the version you desire here
@@ -26,9 +24,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - dependencies
 
       - run:
           name: install dependencies
@@ -42,6 +38,6 @@ jobs:
           paths:
             - ./vendor/bundle
             - ./_assets/yarn
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: dependencies
 
       - run: npm run publish
