@@ -1,5 +1,5 @@
 {
-  "name": "chalk",
+  "name": "constant_evolution",
   "scripts": {
     "setup": "bin/setup",
     "local": "bundle exec jekyll serve --drafts",

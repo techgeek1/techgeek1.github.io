@@ -38,7 +38,7 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             bundle clean
-            yarn install --frozen-lockfile --modules-folder ./_assets/yarn
+            yarn install --modules-folder ./_assets/yarn
 
       - save_cache:
           key: 
@@ -51,6 +51,6 @@ jobs:
       - save_cache:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - ./_assets/yarn
 
       - run: npm run publish
