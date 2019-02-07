@@ -8,6 +8,8 @@ jobs:
     branches:
       only:
         - authoring
+      ignore:
+        - master
 
     docker:
       # specify the version you desire here
