@@ -44,5 +44,4 @@ jobs:
             - ./_assets/yarn
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run: npm run setup
       - run: npm run publish
