@@ -12,7 +12,7 @@ git config user.email "dummy_email@fake.com"
 git config user.name "Techgeek1"
 
 # Checkout authoring branch.
-git checkout -b authoring
+git checkout authoring
 
 # Build site.
 yarn install --modules-folder ./_assets/yarn
