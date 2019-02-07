@@ -24,7 +24,6 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            # when lock file changes, use increasingly general patterns to restore cache
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       
       - restore_cache:
@@ -39,9 +38,7 @@ jobs:
             yarn install --modules-folder ./_assets/yarn
 
       - save_cache:
-          key: 
-            # when lock file changes, use increasingly general patterns to restore cache
-            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
             - ./node_modules
