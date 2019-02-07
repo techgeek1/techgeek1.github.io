@@ -37,7 +37,6 @@ jobs:
       - save_cache:
           paths:
             - ./vendor/bundle
-            - ./_assets/yarn
           key: dependencies
 
       - run: npm run publish
