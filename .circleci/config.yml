@@ -24,19 +24,31 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - dependencies
+            # when lock file changes, use increasingly general patterns to restore cache
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+            - v1-gem-cache-{{ arch }}-
+      
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-            bundle update
-            sudo npm install -g yarn
-            yarn install --modules-folder ./_assets/yarn
+            bundle clean
+            yarn install --frozen-lockfile --modules-folder ./_assets/yarn
 
       - save_cache:
+          key: dependencies
           paths:
             - ./vendor/bundle
-          key: dependencies
+            - ./node_modules
+
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
 
       - run: npm run publish

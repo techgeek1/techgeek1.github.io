@@ -15,7 +15,6 @@ git config user.name "Techgeek1"
 git checkout authoring
 
 # Build site.
-yarn install --modules-folder ./_assets/yarn
 bundle exec jekyll build
 
 # Delete and move files.
@@ -30,10 +29,6 @@ git checkout master
 git stash pop
 git commit --allow-empty -m "$(git log -1 --pretty=%B) [ci update]"
 git push -f -q origin master
-
-# Move back to previous branch.
-git checkout -
-yarn install --modules-folder ./_assets/yarn
 
 echo "Deployed Successfully!"
 
