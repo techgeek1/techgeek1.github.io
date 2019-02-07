@@ -16,10 +16,33 @@ jobs:
       - image: circleci/ruby:2.4.1-node
 
     steps:
+      # SSH fingerprint
       - add_ssh_keys:
           fingerprints:
             - "b2:92:e6:8e:9c:a8:91:8c:28:cb:6c:67:14:8f:75:ba"
+
       - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle update
+            sudo npm install -g yarn
+            yarn install --modules-folder ./_assets/yarn
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+            - ./_assets/yarn
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
       - run: npm run setup
-      #- run: npm run setup
       - run: npm run publish
