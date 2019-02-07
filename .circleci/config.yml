@@ -41,7 +41,9 @@ jobs:
             yarn install --frozen-lockfile --modules-folder ./_assets/yarn
 
       - save_cache:
-          key: dependencies
+          key: 
+            # when lock file changes, use increasingly general patterns to restore cache
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
             - ./node_modules

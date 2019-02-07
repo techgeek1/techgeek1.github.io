@@ -11,8 +11,10 @@ echo "Started deploying"
 git config user.email "dummy_email@fake.com"
 git config user.name "Techgeek1"
 
-# Checkout authoring branch.
-git checkout authoring
+# Checkout master branch.
+git checkout master
+git fetch origin authoring
+git reset --hard FETCH_HEAD
 
 # Build site.
 bundle exec jekyll build
@@ -24,9 +26,6 @@ rm -R _site/
 
 # Push to master.
 git add -fA
-git stash
-git checkout master
-git stash pop
 git commit --allow-empty -m "$(git log -1 --pretty=%B) [ci update]"
 git push -f -q origin master
 
