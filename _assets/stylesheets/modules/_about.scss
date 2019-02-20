@@ -8,3 +8,47 @@
     margin: 50px 0 15px;
   }
 }
+
+.project-link {
+  width: 192px;
+  vertical-align: top;
+  padding-top: 24px;
+}
+
+.project-link img {
+  width: 100%;
+}
+
+.project-content {
+  padding: 0px 0px 0px 20px;
+  padding-top: 16px;
+}
+
+.read-more-state {
+  display: none;
+}
+
+.read-more-state:checked ~ .read-more-container .read-more {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'less';
+}
+
+.read-more {
+  max-height: 3.5em;
+  overflow: hidden;
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: underline;
+}

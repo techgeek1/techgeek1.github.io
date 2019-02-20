@@ -5,14 +5,117 @@ description: ""
 ---
 
 <div class="about {% if site.scrollappear_enabled %}scrollappear{% endif %}">
-  <img src="{% asset 'about.jpg' @path %}" alt="About Nielsen Ramon header image" />
-  <h1>About me</h1>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+  <!-- About Section -->
+  <div>
+    <img src="{% asset 'about/about_small.png' @path %}" alt="About Austin Rife header image" />
+    <h1>About me</h1>
+    <p>
+      I'm Austin, an engineer specializing in virtual reality and real-time simulation living in the San Francisco Bay Area. I write games, engine features, and do research on new ways to simulate complex phenomena in virtual worlds.
+    </p>
+  </div>
+
+  <!-- Games Section -->
+  <div>
+    <h1>Games</h1>
+    <table>
+      <tr>
+        <td class="project-link">
+          <a href="https://www.oculus.com/asgards-wrath/" target="_blank">
+            <img src="{% asset 'about/wrath_small.png' @path %}" alt="Asgard's Wrath" />
+          </a>
+        </td>
+        <td class="project-content">
+          <h3>2019 | Asgard's Wrath</h3>
+          <div class="show-hide">
+            <input type="checkbox" class="read-more-state" id="visible-0" />
+            <div class="read-more-container">
+              <p class="read-more">
+                Unleash the wrath of the Gods in a mythical Norse adventure that can only unfold in VR. Forge your destiny as both a mortal hero and living god in an action role playing game of unworldly depth.
+              </p>
+            </div>
+            <label for="visible-0" class="read-more-trigger"></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="project-link">
+          <a href="https://www.oculus.com/marvel-powers-united-vr/" target="_blank">
+            <img src="{% asset 'about/marvel_small.png' @path %}" alt="Marvel: Powers United VR" />
+          </a>
+        </td>
+        <td class="project-content">
+          <h3>2018 | Marvel: Powers United VR</h3>
+          <div class="show-hide">
+            <input type="checkbox" class="read-more-state" id="visible-1" />
+            <div class="read-more-container">
+              <p class="read-more">
+                Get ready for battle with iconic character powers, over-the-top ultimate abilities, and a full-body transformation only possible in VR.
+              </p>
+            </div>
+            <label for="visible-1" class="read-more-trigger"></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="project-link">
+          <a href="https://store.steampowered.com/app/462000/Cyberpong/" target="_blank">
+            <img src="{% asset 'about/cyberpong_small.png' @path %}" alt="Cyberpong VR" />
+          </a>
+        </td>
+        <td class="project-content">
+          <h3>2016 | Cyberpong VR</h3>
+          <div class="show-hide">
+            <input type="checkbox" class="read-more-state" id="visible-2" />
+            <div class="read-more-container">
+              <p class="read-more">
+                Enter a realm of cyberspace where hitting digital orbs can gain you ultimate glory! In this retro styled game you are given two paddles to prove what you're made of. Harness your skills in single player mode and then face off against your friends in multiplayer matches!
+              </p>
+            </div>
+            <label for="visible-2" class="read-more-trigger"></label>
+          </div>
+        </td>
+      </tr>
+    <table>
+  </div>
+
+  <!-- Other Section -->
+  <div>
+      <h1>Other</h1>
+      <table>
+        <tr>
+          <td class="project-link">
+            <a href="" target="_blank">
+              <img src="{% asset 'about/eden_small.png' @path %}" alt="Eden" />
+            </a>
+          </td>
+          <td class="project-content">
+            <h3>WIP | Eden</h3>
+            <div>
+              <div>
+                <p>
+                  A modular, scalable, and modern simulation engine built from the ground up for VR.
+                </p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="project-link">
+            <a href="https://github.com/techgeek1/rusting_bitmaps" target="_blank">
+              <img src="{% asset 'about/rusting_bitmaps_small.png' @path %}" alt="Rusting Bitmaps" />
+            </a>
+          </td>
+          <td class="project-content">
+            <h3>WIP | Rusting Bitmaps</h3>
+            <div>
+              <div>
+                <p>
+                  A native Rust port of the <a href="https://roaringbitmap.org/" target="_blank"> Roaring Bitmaps</a> project.
+                </p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+  </div>
 </div>
