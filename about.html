@@ -1,13 +1,129 @@
----
-layout: default
-title: "Musings on technology, design, and various experimental projects"
-description: ""
----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Constant Evolution | Musings on technology, design, and various experimental projects</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="about {% if site.scrollappear_enabled %}scrollappear{% endif %}">
+  <meta property="og:title" content="Musings on technology, design, and various experimental projects">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/about">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Constant Evolution">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="/about">
+  <meta name="twitter:title" content="Musings on technology, design, and various experimental projects">
+  <meta name="twitter:description" content="">
+
+  
+    <meta property="og:image" content="/assets/ce_thumb-19832ac0d567954cd2bd9a2938e5f2c2b696469b8c0cf9d87037d5eb51c33d11.jpg">
+    <meta name="twitter:image" content="/assets/ce_thumb-19832ac0d567954cd2bd9a2938e5f2c2b696469b8c0cf9d87037d5eb51c33d11.jpg">
+  
+
+  <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="Constant Evolution Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-light-ab944872c33a62f523e49b9e6402453574ea9decbd9c1ad4466fd7b625eb3cc3.ico">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-fda11ba8d8507fd6b6170e15eed5f02e1e3db92252eac1f386a733247cc471db.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-69c9724bec12a781dff9e2746166f6668b3901c1ea5b2b255781cfa4177c721b.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-51b4366b16e97e16f9636212a3d9d6d9232895ca78c28059659a226ad88bdbc5.css" disabled="true">
+    
+
+  
+  
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Constant Evolution">Constant Evolution</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ecf154b571ab8034ae00aeed91a3b7ad68db80b46d958753ad6216c919486e88.svg#icon-about" xlink:href="/assets/about-ecf154b571ab8034ae00aeed91a3b7ad68db80b46d958753ad6216c919486e88.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/techgeek1" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-094f81040819f34343ee6ffff0980f17e2807b08b595eaaf66ae3554934fd78d.svg#icon-github" xlink:href="/assets/github-094f81040819f34343ee6ffff0980f17e2807b08b595eaaf66ae3554934fd78d.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="https://gitlab.com/techgeek1" rel="noreferrer noopener" target="_blank" title="GitLab">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-gitlab">
+  <use href="/assets/gitlab-cd27fc8b2a8ff6eb466c87e5bd6c8311a45ae0fa6eb8ce830a9378097f16647e.svg#icon-gitlab" xlink:href="/assets/gitlab-cd27fc8b2a8ff6eb466c87e5bd6c8311a45ae0fa6eb8ce830a9378097f16647e.svg#icon-gitlab"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-541ec5cea9cefd10d2fcfec01888f3f231a8829940249835fa7b7b3a12ae0d0d.svg#icon-rss" xlink:href="/assets/rss-541ec5cea9cefd10d2fcfec01888f3f231a8829940249835fa7b7b3a12ae0d0d.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-66869e0bf8dab34bae1c86bda400327b772e0be69e8dc28d3ede896e771320ed.svg#icon-theme" xlink:href="/assets/theme-66869e0bf8dab34bae1c86bda400327b772e0be69e8dc28d3ede896e771320ed.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+        <div class="about scrollappear">
   <!-- About Section -->
   <div>
-    <img src="{% asset 'about/about_small.png' @path %}" alt="About Austin Rife header image" />
+    <img src="/assets/about/about_small-b8de5214b00b006994fc2f95eadb7107ad52f8f0a43e8e6f95ffc58e9cbc1712.png" alt="About Austin Rife header image" />
     <h1>About me</h1>
     <p>
       I'm Austin, an engineer specializing in virtual reality and real-time simulation living in the San Francisco Bay Area. I write games, engine features, and do research on new ways to simulate complex phenomena in virtual worlds.
@@ -21,7 +137,7 @@ description: ""
       <tr>
         <td class="project-link">
           <a href="https://www.oculus.com/asgards-wrath/" target="_blank">
-            <img src="{% asset 'about/wrath_small.png' @path %}" alt="Asgard's Wrath" />
+            <img src="/assets/about/wrath_small-7baf5a9f8f1fc8bb6151726e285ee2b772239cbfbdd700a776432de894746fd0.png" alt="Asgard's Wrath" />
           </a>
         </td>
         <td class="project-content">
@@ -40,7 +156,7 @@ description: ""
       <tr>
         <td class="project-link">
           <a href="https://www.oculus.com/marvel-powers-united-vr/" target="_blank">
-            <img src="{% asset 'about/marvel_small.png' @path %}" alt="Marvel: Powers United VR" />
+            <img src="/assets/about/marvel_small-bda9ee4d0f930b120deae4500bf9aad66efea031872ea1a38421cce1d9585e30.png" alt="Marvel: Powers United VR" />
           </a>
         </td>
         <td class="project-content">
@@ -59,7 +175,7 @@ description: ""
       <tr>
         <td class="project-link">
           <a href="https://store.steampowered.com/app/462000/Cyberpong/" target="_blank">
-            <img src="{% asset 'about/cyberpong_small.png' @path %}" alt="Cyberpong VR" />
+            <img src="/assets/about/cyberpong_small-4e37bf348d083f376b0311ca9037da682442146fac0323838da9cba90a190466.png" alt="Cyberpong VR" />
           </a>
         </td>
         <td class="project-content">
@@ -85,7 +201,7 @@ description: ""
         <tr>
           <td class="project-link">
             <a href="" target="_blank">
-              <img src="{% asset 'about/eden_small.png' @path %}" alt="Eden" />
+              <img src="/assets/about/eden_small-c7fd6a1ec5fc05b90340381f1fee78acb8cfcbfec259f0f81aeccf339f07bb59.png" alt="Eden" />
             </a>
           </td>
           <td class="project-content">
@@ -102,7 +218,7 @@ description: ""
         <tr>
           <td class="project-link">
             <a href="https://github.com/techgeek1/rusting_bitmaps" target="_blank">
-              <img src="{% asset 'about/rusting_bitmaps_small.png' @path %}" alt="Rusting Bitmaps" />
+              <img src="/assets/about/rusting_bitmaps_small-cdcea774202eb5801fc31b21e264d9d5452bf7f3463ce2c0b52752303d205539.png" alt="Rusting Bitmaps" />
             </a>
           </td>
           <td class="project-content">
@@ -119,3 +235,37 @@ description: ""
       </table>
   </div>
 </div>
+        <footer class="footer scrollappear">
+  <p>
+    Blog by Austin "Techgeek1" Rife © 
+    <script type="text/javascript">
+      document.write(new Date().getFullYear())
+    </script>
+  </p>
+  <p style="font-size:75%">
+    Powered by <a href="https://github.com/" target="_blank" title="Github">GitHub</a> and <a href="https://jekyllrb.com/" title="Jekyll">Jekyll</a>.
+    <a href="https://github.com/nielsenramon/chalk", title="nielsenramon/chalk">Chalk</a> theme by Nielsen Ramon
+  </p>
+</footer>
+      </div>
+    </div>
+  </main>
+  
+
+<script type="text/javascript" src="/assets/vendor-9a9dd357c523104bebaea02251409e037c69b20c285bdfbc6961ef0245cf9c11.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
+
+</body>
+</html>

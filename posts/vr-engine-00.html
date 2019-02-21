@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Constant Evolution | Adventures in Building a VR Engine - Introduction</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Adventures in Building a VR Engine - Introduction">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/posts/vr-engine-00">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Constant Evolution">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="/posts/vr-engine-00">
+  <meta name="twitter:title" content="Adventures in Building a VR Engine - Introduction">
+  <meta name="twitter:description" content="">
+
+  
+    <meta property="og:image" content="/assets/ce_thumb-19832ac0d567954cd2bd9a2938e5f2c2b696469b8c0cf9d87037d5eb51c33d11.jpg">
+    <meta name="twitter:image" content="/assets/ce_thumb-19832ac0d567954cd2bd9a2938e5f2c2b696469b8c0cf9d87037d5eb51c33d11.jpg">
+  
+
+  <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="Constant Evolution Last 10 blog posts" />
+
+  
+
+  
+
+    
+      <link rel="icon" type="image/x-icon" href="/assets/favicon-light-ab944872c33a62f523e49b9e6402453574ea9decbd9c1ad4466fd7b625eb3cc3.ico">
+      <link rel="apple-touch-icon" href="/assets/apple-touch-icon-light-fda11ba8d8507fd6b6170e15eed5f02e1e3db92252eac1f386a733247cc471db.png">
+      <link rel="stylesheet" type="text/css" title="light" id="light" href="/assets/light-69c9724bec12a781dff9e2746166f6668b3901c1ea5b2b255781cfa4177c721b.css">
+      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="/assets/dark-51b4366b16e97e16f9636212a3d9d6d9232895ca78c28059659a226ad88bdbc5.css" disabled="true">
+    
+
+  
+  
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav scrollappear">
+  <a href="/" class="header-logo" title="Constant Evolution">Constant Evolution</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-about">
+  <use href="/assets/about-ecf154b571ab8034ae00aeed91a3b7ad68db80b46d958753ad6216c919486e88.svg#icon-about" xlink:href="/assets/about-ecf154b571ab8034ae00aeed91a3b7ad68db80b46d958753ad6216c919486e88.svg#icon-about"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/techgeek1" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-github">
+  <use href="/assets/github-094f81040819f34343ee6ffff0980f17e2807b08b595eaaf66ae3554934fd78d.svg#icon-github" xlink:href="/assets/github-094f81040819f34343ee6ffff0980f17e2807b08b595eaaf66ae3554934fd78d.svg#icon-github"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a href="https://gitlab.com/techgeek1" rel="noreferrer noopener" target="_blank" title="GitLab">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-gitlab">
+  <use href="/assets/gitlab-cd27fc8b2a8ff6eb466c87e5bd6c8311a45ae0fa6eb8ce830a9378097f16647e.svg#icon-gitlab" xlink:href="/assets/gitlab-cd27fc8b2a8ff6eb466c87e5bd6c8311a45ae0fa6eb8ce830a9378097f16647e.svg#icon-gitlab"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-rss">
+  <use href="/assets/rss-541ec5cea9cefd10d2fcfec01888f3f231a8829940249835fa7b7b3a12ae0d0d.svg#icon-rss" xlink:href="/assets/rss-541ec5cea9cefd10d2fcfec01888f3f231a8829940249835fa7b7b3a12ae0d0d.svg#icon-rss"></use>
+</svg>
+
+        </a>
+      </li>
+    
+    
+      <li>
+        <a onclick="toggle()" title="Toggle Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-theme">
+  <use href="/assets/theme-66869e0bf8dab34bae1c86bda400327b772e0be69e8dc28d3ede896e771320ed.svg#icon-theme" xlink:href="/assets/theme-66869e0bf8dab34bae1c86bda400327b772e0be69e8dc28d3ede896e771320ed.svg#icon-theme"></use>
+</svg>
+
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+        <article class="article scrollappear">
+          <header class="article-header">
+            <h1>Adventures in Building a VR Engine - Introduction</h1>
+            <p></p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                February 16, 2019
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+                
+                
+                  5 minute read
+                
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+                
+                  <a href="/tag/vr">vr</a>
+                
+                  <a href="/tag/eden">eden</a>
+                
+                  <a href="/tag/engine">engine</a>
+                
+                  <a href="/tag/simulation">simulation</a>
+                
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <p>After studying, building and playing with a quite a few virtual reality projects and wading through the internals of both the Unity and Unreal engines I have noticed some things about the way we build immersive content that are rather obtuse. The processes, tooling, and even some of the design aspects currently used to build immersive simulations lack support for the challenges encountered developing such a high detail simulated world.</p>
+
+<h2 id="tools">Tools</h2>
+<p>Building immersive virtual worlds presents some unique technical challenges:</p>
+
+<ul>
+  <li>Objects must have even the smallest details crafted.</li>
+  <li>Details like accurate collision geometry, mass, and accurate audio response matter.</li>
+  <li>The worlds are much more dynamic requiring extra care in crafting the environment.</li>
+  <li>The size of the worlds needs to be much larger than traditional levels in order to maintain a high level of immersion. Artificial invisible walls are not a good solution.</li>
+  <li>Immersive simulations are by nature highly performance sensitive even in the simplest case.</li>
+</ul>
+
+<p>All this adds up to immersive content production being expensive, labor intensive, and error prone.</p>
+
+<p>A heavier reliance on composable procedural systems is likely the solution to easing development for these types of applications. Edit time procedural systems can automate the common processes of object creation, ease the building of large environments, and potentially reduce the number of assets that need to be manually produced. Runtime generation may play a part later, however real-time generation of content that is both interesting and bug free is a much harder problem.</p>
+
+<p>Computation power is another issue that needs to be solved since an immersive simulation has to simulate far more objects and phenomena to create a convincing facsimile of reality. Current hardware is highly parallel yet few existing public engines take advantage of that parallelism, most only fully utilizing a few of the available cores on a modern CPU leaving much of the resources available unused. The other issue is the tools used in those engines make writing parallel code difficult for those without an intimate knowledge of multithreaded programming.</p>
+
+<p>Designing a new engine architecture that allows for close to linear scalability with available compute power would do much to eliminate the burden of simulating these worlds.</p>
+
+<h1 id="a-new-engine">A New Engine</h1>
+<p>Given the above ideas it’s my opinion that a new type of engine built from the ground up for VR which takes full advantage of modern hardware is the solution. To that end I have embarked on a research project to see how these ideas pan out and just what’s possible if you throw out the old assumptions. That project is named Eden.</p>
+
+<p>Eden’s Core Design Guidelines:</p>
+
+<ul>
+  <li>Near linear scaling with available processing power.</li>
+  <li>Composable architecture to allow easy modification and experimentation.</li>
+  <li>Maximum automation. If something can be automated, it should be.</li>
+  <li>Massively parallel by design</li>
+  <li>Expressive and concise APIs that enable the developer focus on the problem at hand, not the minutiae of the surrounding environment.</li>
+</ul>
+
+<p>Traditionally a project of this magnitude would imply using C/C++ to build it. However, with how old and error prone those languages are it makes sense to look around and see if there’s any new approaches to the age-old problem. Ideally the language used should take care of the minutia while still allowing low level control where necessary.</p>
+
+<p>Although relatively new and somewhat immature, Rust was chosen as the language for this project. Rust provides quite a few valuable tools for avoiding common issues in a project of this size making it a logical choice.</p>
+
+<ul>
+  <li>Compile time verified memory safety. Eliminates most memory errors from being a concern (most of the time)</li>
+  <li>A statically verified multithreading model provided by a combination of the borrow rules and the type system.</li>
+  <li>An expressive type system that allows the developer to encode their intent in a compile time verifiable way.</li>
+  <li>A built in and easy to use build system</li>
+  <li>The ability to interoperate with other languages via a C interface</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<p>Eden’s architecture needs to support a high degree of parallelism without increasing developer overhead. The current plan for achieving this goal is to build the engine and all its systems on something resembling the union of a job system and entity component system. The main concepts of this structure are the entity, storage, and system.</p>
+
+<p>Entities in the framework are merely ids. Logically they are the amalgamation of their components however they are never explicitly stored together. This allows the engine to organize the data in a layout optimal for the hardware.</p>
+
+<p>Storages are simply buffers that hold all the components of a single type in the simulation. Internal sorting and other details are handled by their respective implementations. Depending on the type these storages can be queried and manipulated at runtime by systems.</p>
+
+<p>Systems are singular jobs executed in parallel and have the ability to, at the developer’s discretion, split themselves into more sub jobs that can be distributed further across the hardware. Each system must define its predecessor systems and the storages it reads and writes. On startup up the framework goes through all the registered systems and sets up a series of execution waves that satisfy several constraints:</p>
+
+<ul>
+  <li>Multiple systems may read from a storage</li>
+  <li>Only one system may write to a storage</li>
+  <li>A wave may not have any data or order dependencies within it</li>
+  <li>Each wave must be executed sequentially and complete before the next wave can be dispatched</li>
+</ul>
+
+<p>Assuming all the above constraints are upheld the entire set of logic can be executed with a high degree of parallelism and no contention or data corruption. Of course, this new architecture means that Eden cannot leverage existing sub engines for audio, physics, and the likes; and thus, requires building variants of those that take advantage of this architecture.</p>
+
+<p>There are quite a few unanswered questions about this type of architecture:</p>
+<ul>
+  <li>Can the sub engines support this type of parallel execution and have performance on par or better than the existing implementations?</li>
+  <li>Does this type of architecture have any serious limitations onthe type of content and logic that it can support?</li>
+  <li>How will this perform with a low number of entities?</li>
+  <li>Which is faster? A strictly linear, or fingerprint-based data layout (more details below)</li>
+</ul>
+
+<h3 id="note-on-fingerprints">Note on Fingerprints</h3>
+<p>An alternative structure for data storage that I have been considering is fingerprints. The idea is similar to the archetypes in unity’s ECS implementation where a fingerprint is a specific subset of components that belong to an entity. Components are then stored in linear buffers adjacent to each other as defined by the fingerprint they belong to. The only disadvantage to this approach is management overhead and it may break down when processing large numbers of entities. This approach needs more testing before committing to it.</p>
+
+<p>There is also a notable lack of public information on the performance characteristics between different methods of organizing an ECS that go beyond trivial toy implementations. I suspect that linear buffers may perform better in the worst case, systems operating on a few types with millions of entries, since they would allow for streaming the data into the caches but this requires real world testing and benchmarks to determine if that hypothesis is correct.</p>
+
+<p>That covers the high-level overview of this research project. In later articles I’ll go into details on the implementation, any benchmarks, and other information gained during the course of this project.</p>
+
+          </div>
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=Adventures+in+Building+a+VR+Engine+-+Introduction%20-%20/posts/vr-engine-00" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=/posts/vr-engine-00" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+            <a href="https://plus.google.com/share?url=/posts/vr-engine-00" title="Share on Google+" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 128 128"><path d="M40.7 55.9v16.1c0 0 15.6 0 22 0C59.2 82.5 53.8 88.2 40.7 88.2c-13.3 0-23.7-10.8-23.7-24.2s10.4-24.2 23.7-24.2c7.1 0 11.6 2.5 15.8 5.9 3.3-3.3 3.1-3.8 11.6-11.9 -7.2-6.6-16.8-10.6-27.4-10.6C18.2 23.3 0 41.5 0 64c0 22.5 18.2 40.7 40.7 40.7 33.6 0 41.8-29.3 39-48.8H40.7zM113.9 56.7V42.6h-10.1v14.1H89.4v10.1h14.5v14.5h10.1V66.8H128V56.7H113.9z"/></svg>
+            </a>
+          </div>
+
+          
+        </article>
+        <footer class="footer scrollappear">
+  <p>
+    Blog by Austin "Techgeek1" Rife © 
+    <script type="text/javascript">
+      document.write(new Date().getFullYear())
+    </script>
+  </p>
+  <p style="font-size:75%">
+    Powered by <a href="https://github.com/" target="_blank" title="Github">GitHub</a> and <a href="https://jekyllrb.com/" title="Jekyll">Jekyll</a>.
+    <a href="https://github.com/nielsenramon/chalk", title="nielsenramon/chalk">Chalk</a> theme by Nielsen Ramon
+  </p>
+</footer>
+      </div>
+    </div>
+  </main>
+  
+
+<script type="text/javascript" src="/assets/vendor-9a9dd357c523104bebaea02251409e037c69b20c285bdfbc6961ef0245cf9c11.js"></script>
+
+
+  <script type="text/javascript" src="/assets/webfonts-96493456d319d1bf419afdf8701552d4d486fee6afd304897d4fd81eb4e0cc0b.js"></script>
+
+
+
+  <script type="text/javascript" src="/assets/scrollappear-e2da8ea567e418637e31266cc5302126eaa79f62a2273739086358b589a89ee6.js"></script>
+
+
+<script type="text/javascript" src="/assets/application-cfde13ac81ddaf4351b2e739603e2baf688d0fcc9aba613fe62bbb1c7b037fb9.js"></script>
+
+
+  <script type="text/javascript" src="/assets/themetoggle-df0d3d73164dc26dffbd630182ae4d0dfa7bee6b694a2b5d565d73595b582bbf.js"></script>
+
+</body>
+</html>
