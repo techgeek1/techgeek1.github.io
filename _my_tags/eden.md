@@ -1,4 +1,0 @@
----
-slug: eden
-name: Eden
----
