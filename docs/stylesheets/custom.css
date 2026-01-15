@@ -13,10 +13,10 @@
 
 /* Light theme */
 [data-md-color-scheme="default"] {
-    /* Warm light surfaces */
-    --surface-base: #f5f5f7;
-    --surface-container: #eaeaec;
-    --surface-card: #d0d0d2;
+    /* Warm light surfaces - darker = elevated, 12-step delta */
+    --surface-base: #e4e4e6;
+    --surface-container: #d8d8da;
+    --surface-card: #ccccce;
 
     /* Dark text on light */
     --text-high: rgba(0, 0, 0, 0.87);
@@ -46,18 +46,18 @@
     --md-shadow-z2: 0 4px 8px rgba(0, 0, 0, 0.15);
     --md-shadow-z3: 0 8px 16px rgba(0, 0, 0, 0.2);
 
-    /* Light header/footer - darker than page for contrast */
-    --md-primary-fg-color: #d0d0d2;
-    --md-primary-fg-color--light: #d8d8da;
-    --md-primary-fg-color--dark: #c8c8ca;
+    /* Light header/footer - lightest element */
+    --md-primary-fg-color: #f0f0f2;
+    --md-primary-fg-color--light: #f4f4f6;
+    --md-primary-fg-color--dark: #ebebed;
     --md-primary-bg-color: rgba(0, 0, 0, 0.87);
     --md-primary-bg-color--light: rgba(0, 0, 0, 0.6);
 
     --md-footer-fg-color: rgba(0, 0, 0, 0.87);
     --md-footer-fg-color--light: rgba(0, 0, 0, 0.6);
     --md-footer-fg-color--lighter: rgba(0, 0, 0, 0.38);
-    --md-footer-bg-color: #d0d0d2;
-    --md-footer-bg-color--dark: #c8c8ca;
+    --md-footer-bg-color: #f0f0f2;
+    --md-footer-bg-color--dark: #ebebed;
 }
 
 /* Dark theme */
@@ -139,6 +139,47 @@ body {
 /* Header */
 .md-header {
     background-color: var(--md-primary-fg-color);
+    z-index: 102;
+}
+
+.md-header__social {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 0.2rem;
+}
+
+.md-header__social .md-header__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    color: var(--md-primary-bg-color);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.md-header__social .md-header__button:hover {
+    opacity: 1;
+}
+
+.md-header__social .md-header__button svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor;
+}
+
+/* Keep header visible when card is expanded */
+body.card-expanded .md-header {
+    position: fixed !important;
+    top: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+body.card-expanded .md-container {
+    padding-top: var(--md-toolbar-height, 48px);
 }
 
 /* Search box */
@@ -217,13 +258,14 @@ body {
     background: var(--surface-card, #2a2a2a);
     border-radius: 6px;
     overflow: hidden;
+    box-shadow: var(--md-shadow-z1);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
     display: flex;
     flex-direction: column;
     max-height: 380px;
 }
 
-.card:hover {
+.card:hover:not(.expanded):not(.collapsing) {
     transform: translateY(-2px);
     box-shadow: var(--md-shadow-z2);
 }
@@ -237,7 +279,7 @@ body {
     height: 144px !important;
     min-height: 144px !important;
     max-height: 144px !important;
-    transition: height 0.2s ease, min-height 0.2s ease, max-height 0.2s ease;
+    transition: height 0.25s ease 0.15s, min-height 0.25s ease 0.15s, max-height 0.25s ease 0.15s;
 }
 
 .card-banner {
@@ -252,28 +294,18 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     border: none;
-    transition: height 0.2s ease, min-height 0.2s ease, max-height 0.2s ease;
+    transition: height 0.25s ease 0.15s, min-height 0.25s ease 0.15s, max-height 0.25s ease 0.15s;
 }
 
-.card::before {
-    content: '';
+/* Banner gradient overlay - positioned at bottom of banner */
+.card-gradient {
     position: absolute;
-    top: 104px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 40px;
+    height: 60px;
     background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
-    z-index: 1;
     pointer-events: none;
-    transition: top 0.2s ease;
-}
-
-.card.expanded::before {
-    top: 180px;
-}
-
-.card.collapsing::before {
-    top: 104px;
 }
 
 .card-content {
@@ -295,9 +327,7 @@ body {
 
 .card-content p {
     margin-bottom: 0;
-    font-size: 0.85rem;
-    color: var(--text-medium);
-    line-height: 1.5;
+    color: var(--text-high);
 }
 
 /* Eden card special banner */
@@ -314,7 +344,7 @@ body {
     padding: 16px;
     margin: 0 !important;
     box-sizing: border-box;
-    transition: height 0.2s ease, min-height 0.2s ease, max-height 0.2s ease, padding 0.2s ease;
+    transition: height 0.25s ease 0.15s, min-height 0.25s ease 0.15s, max-height 0.25s ease 0.15s, padding 0.25s ease 0.15s;
 }
 
 .card-banner-eden img {
@@ -344,25 +374,38 @@ body {
     transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
 }
 
-/* Dim sibling cards */
-.card.dimmed {
-    opacity: 0.2;
-    pointer-events: none;
+/* Backdrop overlay */
+.card-backdrop {
+    position: fixed;
+    top: var(--md-toolbar-height, 48px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.25s ease;
 }
 
-/* Placeholder to maintain grid space */
+.card-backdrop.visible {
+    opacity: 1;
+}
+
+.card-backdrop.fading {
+    opacity: 0;
+}
+
+/* Placeholder to hold grid space */
 .card-placeholder {
     visibility: hidden;
 }
 
-/* Expanded card overlay */
-.card.expanded {
-    position: absolute;
-    z-index: 2;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+/* Expanded card modal */
+.card.expanded,
+.card.collapsing {
     max-height: none;
     border-radius: 6px;
-    transition: left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.3s ease, color 0.3s ease;
+    transition: top 0.25s ease, left 0.25s ease, width 0.25s ease, height 0.25s ease, box-shadow 0.25s ease;
     overflow: hidden;
 }
 
@@ -370,62 +413,35 @@ body {
 .card.expanded > p:first-child,
 .card.expanded > p:first-child > img,
 .card.expanded .card-banner {
-    height: 220px !important;
-    min-height: 220px !important;
-    max-height: 220px !important;
+    height: 228px !important;
+    min-height: 228px !important;
+    max-height: 228px !important;
 }
 
 /* Per-image positioning overrides */
-.card-banner--top {
-    object-position: center top !important;
-}
-
 .card-banner--top-15 {
     object-position: center 15% !important;
 }
 
-.card-banner--top-20 {
-    object-position: center 20% !important;
-}
-
-.card-banner--top-25 {
-    object-position: center 25% !important;
-}
-
-.card-banner--top-10 {
-    object-position: center 10% !important;
-}
-
-.card-banner--bottom-25 {
-    object-position: center 75% !important;
-}
-
-.card-banner--bottom-20 {
-    object-position: center 80% !important;
-}
-
 .card.expanded .card-banner-eden {
-    height: 220px !important;
-    min-height: 220px !important;
-    max-height: 220px !important;
+    height: 228px !important;
+    min-height: 228px !important;
+    max-height: 228px !important;
 }
 
-/* Reset banner height at start of collapse */
+/* Banner height during collapse - controlled by JS, just define transition */
 .card.collapsing > p:first-child,
 .card.collapsing > p:first-child > img,
 .card.collapsing .card-banner {
-    height: 144px !important;
-    min-height: 144px !important;
-    max-height: 144px !important;
+    transition: height 0.25s ease, min-height 0.25s ease, max-height 0.25s ease !important;
 }
 
 .card.collapsing .card-banner-eden {
-    height: 144px !important;
-    min-height: 144px !important;
-    max-height: 144px !important;
+    transition: height 0.25s ease, min-height 0.25s ease, max-height 0.25s ease, padding 0.25s ease !important;
 }
 
-.card.expanded .card-content {
+.card.expanded .card-content,
+.card.collapsing .card-content {
     flex: 1;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -433,34 +449,48 @@ body {
     transition: scrollbar-color 0.3s ease;
 }
 
-.card.expanded .card-content:hover {
+.card.expanded .card-content:hover,
+.card.collapsing .card-content:hover {
     scrollbar-color: var(--text-disabled) transparent;
 }
 
-.card.expanded .card-content::-webkit-scrollbar {
+.card.expanded .card-content::-webkit-scrollbar,
+.card.collapsing .card-content::-webkit-scrollbar {
     width: 8px;
 }
 
-.card.expanded .card-content::-webkit-scrollbar-track {
+.card.expanded .card-content::-webkit-scrollbar-track,
+.card.collapsing .card-content::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.card.expanded .card-content::-webkit-scrollbar-thumb {
+.card.expanded .card-content::-webkit-scrollbar-thumb,
+.card.collapsing .card-content::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
 
-.card.expanded .card-content:hover::-webkit-scrollbar-thumb {
+.card.expanded .card-content:hover::-webkit-scrollbar-thumb,
+.card.collapsing .card-content:hover::-webkit-scrollbar-thumb {
     background: var(--text-disabled);
 }
 
 .card.transitioning .card-content {
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
-.card.transitioning .card-content > * {
-    opacity: 0;
+.card.collapsing .card-content {
+    overflow-y: scroll;
+}
+
+.card.transitioning .card-content > *,
+.card.collapsing .card-content > * {
+    animation: fadeSlideOut 0.15s ease forwards;
+}
+
+.card-content > * {
+    transition: opacity 0.15s ease;
 }
 
 .card.expanded:not(.transitioning) .card-content > h3,
@@ -468,17 +498,22 @@ body {
     animation: fadeSlideIn 0.2s ease forwards;
 }
 
+.card:not(.expanded):not(.collapsing):not(.transitioning) .card-content > * {
+    animation: fadeIn 0.2s ease forwards;
+}
+
 .card-details {
     display: none;
 }
 
-.card.expanded .card-details {
+.card.expanded:not(.transitioning) .card-details {
     display: block;
-    opacity: 0;
+    animation: fadeSlideIn 0.25s ease forwards;
 }
 
-.card.expanded:not(.transitioning) .card-details {
-    animation: fadeSlideIn 0.25s ease forwards;
+.card.collapsing .card-details {
+    display: block;
+    opacity: 0;
 }
 
 @keyframes fadeSlideIn {
@@ -489,6 +524,17 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 }
 
@@ -507,15 +553,11 @@ body {
 .card-details ul {
     margin: 0;
     padding-left: 1.25rem;
-    color: var(--text-medium);
-    font-size: 0.85rem;
-    line-height: 1.6;
+    color: var(--text-high);
 }
 
 .card-details p {
-    color: var(--text-medium);
-    font-size: 0.85rem;
-    line-height: 1.6;
+    color: var(--text-high);
     margin-bottom: 0.75rem;
 }
 
@@ -526,24 +568,25 @@ body {
 
 .card-year {
     position: absolute;
-    top: 104px;
+    bottom: 0.375rem;
     right: 0.375rem;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
     padding: 0.25rem 0.6rem;
     border-radius: 1rem;
     font-size: 0.75rem;
     font-weight: 500;
-    z-index: 1;
-    transition: top 0.2s ease;
+    z-index: 2;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.card.expanded .card-year {
-    top: 180px;
+/* Year pills match hero skill pills */
+[data-md-color-scheme="slate"] .card-year {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
 }
 
-.card.collapsing .card-year {
-    top: 104px;
+[data-md-color-scheme="default"] .card-year {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
 }
 
 .card-close {
@@ -573,6 +616,24 @@ body {
 
 .card-close:hover {
     background: rgba(0, 0, 0, 0.7);
+}
+
+/* Scroll indicator for expanded card content */
+.card.expanded .card-content::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    display: block;
+    height: 40px;
+    margin-top: -40px;
+    background: linear-gradient(to bottom, transparent, var(--surface-card));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card.expanded .card-content.has-overflow::after {
+    opacity: 1;
 }
 
 /* Hero section */
@@ -719,11 +780,15 @@ body {
 }
 
 .contact-links {
+    margin: 0.5rem 0 0.75rem;
+}
+
+.contact-links > p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin: 0.5rem 0 0.75rem;
+    gap: 0.75rem;
+    margin: 0;
 }
 
 .contact-status {
@@ -744,10 +809,32 @@ body {
     border-radius: 2rem;
     font-size: 0.95rem;
     text-decoration: none !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .contact-link:hover {
     transform: translateY(-2px);
     box-shadow: var(--md-shadow-z2);
 }
+
+[data-md-color-scheme="slate"] .contact-link:hover {
+    background: #3a3a3a;
+}
+
+[data-md-color-scheme="default"] .contact-link:hover {
+    background: #c0c0c2;
+}
+
+.contact-link:active {
+    transform: translateY(0);
+    box-shadow: var(--md-shadow-z1);
+}
+
+[data-md-color-scheme="slate"] .contact-link:active {
+    background: #2a2a2a;
+}
+
+[data-md-color-scheme="default"] .contact-link:active {
+    background: #b8b8ba;
+}
+

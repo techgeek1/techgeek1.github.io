@@ -31,8 +31,8 @@ I'm drawn to problems that reward careful thinking: compilers, graphics pipeline
 
 <div class="card-grid" markdown>
 
-<div class="card" markdown>
-<img class="card-banner card-banner--top" src="images/asgards-wrath-2.jpg" alt="Asgard's Wrath 2">
+<div class="card" data-card-id="asgards-wrath-2" markdown>
+<img class="card-banner" src="images/asgards-wrath-2.jpg" alt="Asgard's Wrath 2">
 <span class="card-year">2023</span>
 <div class="card-content" markdown>
 
@@ -58,8 +58,8 @@ Shipped 2023 at Meta. Contributed Blueprint VM optimizations (~50% execution tim
 <button class="card-close">&times;</button>
 </div>
 
-<div class="card" markdown>
-<img class="card-banner card-banner--bottom-25" src="images/asgards-wrath.jpg" alt="Asgard's Wrath">
+<div class="card" data-card-id="asgards-wrath" markdown>
+<img class="card-banner" src="images/asgards-wrath.jpg" alt="Asgard's Wrath">
 <span class="card-year">2019</span>
 <div class="card-content" markdown>
 
@@ -84,8 +84,8 @@ Award-winning VR action RPG that set a new standard for depth and polish in VR g
 <button class="card-close">&times;</button>
 </div>
 
-<div class="card" markdown>
-<img class="card-banner card-banner--top-10" src="images/marvel-powers-united.jpg" alt="Marvel Powers United VR">
+<div class="card" data-card-id="marvel-powers-united" markdown>
+<img class="card-banner" src="images/marvel-powers-united.jpg" alt="Marvel Powers United VR">
 <span class="card-year">2018</span>
 <div class="card-content" markdown>
 
@@ -110,8 +110,8 @@ Cooperative VR brawler letting players embody Marvel superheroes. 4-player onlin
 <button class="card-close">&times;</button>
 </div>
 
-<div class="card" markdown>
-<img class="card-banner card-banner--top-25" src="images/cyberpong.jpg" alt="Cyberpong">
+<div class="card" data-card-id="cyberpong" markdown>
+<img class="card-banner card-banner--top-15" src="images/cyberpong.jpg" alt="Cyberpong">
 <span class="card-year">2016</span>
 <div class="card-content" markdown>
 
@@ -135,7 +135,7 @@ Futuristic VR pong game designed for arcade and home VR. One of my first shipped
 <button class="card-close">&times;</button>
 </div>
 
-<div class="card" markdown>
+<div class="card" data-card-id="eden" markdown>
 <div class="card-banner-eden"><img src="images/eden-logo.svg" alt="Eden"></div>
 <span class="card-year">Ongoing</span>
 <div class="card-content" markdown>
