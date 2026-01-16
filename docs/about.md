@@ -2,8 +2,8 @@
 
 # Austin Rife
 
-<p class="subtitle">Senior Software Engineer</p>
-<p class="tagline">Systems architecture, performance, and the foundational work that makes scale possible.</p>
+<p class="subtitle">Engine Programmer</p>
+<p class="tagline">When the box isn't big enough, I build a new one. Preferably in Rust.</p>
 
 <div class="skills">
   <span class="skill">Rust</span>
@@ -15,21 +15,52 @@
 
 </div>
 
-## What I Do
+## About Me
 
 ---
 
-I build the systems that other systems depend on. My work lives at the intersection of performance engineering and developer experience—creating tools and architectures that are fast, correct, and pleasant to work with.
+I build the systems at the foundation. Engine architecture, core systems, performance-critical code, and the tools that tie it all together. The low-level and broad reaching work where getting it wrong means everything above is wrong too.
 
-Most of my professional work has been in games and VR, shipping titles at Meta through Sanzaru Games. Outside of work, I've spent over seven years building a personal game engine as a platform for deep systems exploration.
+Professionally, I've shipped four VR titles across two studios, with a consistent thread of performance optimization and developer tooling. I owned the cinematics systems for three of them, evolving the design across each iteration.
 
-I'm drawn to problems that reward careful thinking: compilers, graphics pipelines, data-oriented design, and the kind of foundational work that quietly makes everything else possible.
+I'm drawn to the hard problems that few want to touch: software architecture, systems design, compilers, graphics pipelines. The foundational work that rewards careful thinking and quietly makes everything else possible.
 
 ## Portfolio
 
 ---
 
 <div class="card-grid" markdown>
+
+<div class="card" data-card-id="unannounced" markdown>
+<div class="card-banner-placeholder">
+  <span class="card-year">2026</span>
+</div>
+<div class="card-content" markdown>
+
+### Unannounced VR Title
+
+AAA VR project under NDA. Deep engine and systems work. Spatial partitioning, audio streaming, engine optimizations, and cinematics system v2.
+
+<div class="card-details" markdown>
+
+#### Contributions
+
+- **Cinematics System v2** — Ground-up rewrite of the cinematics tooling, building on lessons from v1.
+- **Automated IGC Pipeline** — Built fully automated cinematic rendering pipeline capturing 360 video and posting to SyncSketch for review.
+- **Spatial Partitioning** — Hierarchical spatial data structures for efficient world queries and streaming.
+- **Audio Streaming** — FMOD bank loading and audio memory optimization.
+- **Motion Matching Investigation** — Evaluated feasibility of motion matching in Unreal with animation team. Abandoned due to system bugs.
+- **Engine Optimization** — Ongoing performance analysis and low-level optimization work.
+- **AI Workflow Integration** — Explored integrating AI tools into production workflows.
+
+#### Context
+
+Unreleased AAA VR title. Unable to share further details due to NDA.
+
+</div>
+</div>
+<button class="card-close">&times;</button>
+</div>
 
 <div class="card" data-card-id="asgards-wrath-2" markdown>
 <picture>
@@ -41,20 +72,22 @@ I'm drawn to problems that reward careful thinking: compilers, graphics pipeline
 
 ### [Asgard's Wrath 2](https://www.meta.com/experiences/asgards-wrath-2/2603836099654226/)
 
-Shipped 2023 at Meta. Contributed Blueprint VM optimizations (~50% execution time reduction), spatial partitioning systems, cinematic authoring tools, and the save system.
+AAA VR action RPG for Meta Quest 2/3. 60+ hour Norse mythology epic. Built cinematics system, save system, AI prototype. Executed major engine upgrade.
 
 <div class="card-details" markdown>
 
 #### Contributions
 
-- **Blueprint VM Optimization** — Profiled and optimized Unreal's Blueprint virtual machine, achieving ~50% reduction in execution time for gameplay scripts
-- **Spatial Partitioning** — Implemented hierarchical spatial data structures for efficient world queries and streaming
-- **Cinematic Tools** — Built authoring tools for in-game cinematics, enabling designers to create complex sequences
-- **Save System** — Designed and implemented the game's save/load architecture handling complex world state
+- **Cinematics System** — Designed and built custom node-graph cinematics tooling from scratch. Scaled team adoption from 3 to 30 users. Shipped a Pixar-movie's worth of cinematic content.
+- **Save System** — Sole owner of save/load architecture handling complex world state across 60+ hours of gameplay.
+- **HTN AI Prototype** — Wrote the hierarchical task network prototype that evolved into the game's AI systems.
+- **Engine Upgrade (UE 4.25→4.27)** — Primary engineer for 6 months of a year-long major engine upgrade, merging extensive custom engine changes and ensuring stability at switchover.
+- **Packaging Optimizations** — Custom smart world pointer implementation for reduced package sizes.
+- **Performance** — Ongoing performance analysis, optimization, and Blueprint VM profiling work.
 
 #### Context
 
-60+ hour action RPG for Meta Quest. One of the largest and most ambitious VR titles to date, pushing the boundaries of what's possible on standalone hardware.
+Award-winning 60+ hour action RPG for Meta Quest 2/3. One of the largest and most ambitious VR titles to date, pushing the boundaries of standalone hardware.
 
 </div>
 </div>
@@ -71,15 +104,19 @@ Shipped 2023 at Meta. Contributed Blueprint VM optimizations (~50% execution tim
 
 ### [Asgard's Wrath](https://www.meta.com/experiences/pcvr/asgards-wrath/1180401875303371/)
 
-Shipped 2019 at Meta. Part of the engineering team building core gameplay systems for this action RPG.
+AAA VR action RPG for Oculus Rift. Award-winning Norse mythology adventure. IGC systems, NPC logic, paired animations, and gameplay mechanics.
 
 <div class="card-details" markdown>
 
 #### Contributions
 
-- Core gameplay systems engineering
-- Combat and interaction systems
-- Performance optimization for VR
+- **IGC Systems** — Owned the in-game cinematic systems, building on inherited design from another engineer.
+- **NPC Logic** — Implemented fairy companion and tavern NPC behavior systems.
+- **Paired Animations** — Built paired animation support used across narrative setpieces throughout the game.
+- **Lock & Key System** — Wrote the lock and key mechanism used on all doors in the game.
+- **Buoyancy Integration** — Integrated buoyancy physics into opening IGC with PID-based following for convincing water movement. Resolved obscure undefined behavior.
+- **Gameplay Mechanics** — Wrote the explosives mechanic for destructible props.
+- **Performance** — Ongoing performance analysis and optimization.
 
 #### Context
 
@@ -100,19 +137,19 @@ Award-winning VR action RPG that set a new standard for depth and polish in VR g
 
 ### [Marvel Powers United VR](https://www.marvel.com/games/marvel-powers-united-vr)
 
-Shipped 2018 at Meta. Contributed to this cooperative multiplayer VR experience featuring Marvel's iconic heroes.
+Cooperative VR brawler for Oculus Rift. 4-player online co-op with iconic Marvel heroes. Joined late to help ship.
 
 <div class="card-details" markdown>
 
 #### Contributions
 
-- Multiplayer gameplay systems
-- Character ability implementation
-- VR interaction design
+- **Critical Bug Fix** — Diagnosed and resolved an extremely obscure threading/networking/GPU sync bug over 1-2 months. Critical path blocker.
+- **Performance** — Performance analysis and optimization.
+- **Ship Support** — Various bug fixes and data upgrades as needed to get the game out the door.
 
 #### Context
 
-Cooperative VR brawler letting players embody Marvel superheroes. 4-player online co-op with a roster of iconic characters each with unique powers and playstyles.
+Cooperative VR brawler letting players embody Marvel superheroes. 4-player online co-op with a roster of iconic characters. Joined the project near completion to help push it across the finish line.
 
 </div>
 </div>
@@ -129,18 +166,19 @@ Cooperative VR brawler letting players embody Marvel superheroes. 4-player onlin
 
 ### [Cyberpong](https://store.steampowered.com/app/462000/Cyberpong/)
 
-Shipped 2016 at Colopl. Implemented networked AI players and configured VR arcade deployment for this futuristic pong game.
+Futuristic VR pong for HTC Vive. Arcade and home release. Networked AI, localization, and arcade tooling.
 
 <div class="card-details" markdown>
 
 #### Contributions
 
-- **Networked AI** — Implemented AI opponents that could seamlessly join networked matches
-- **VR Arcade Deployment** — Configured and deployed builds for VR arcade installations
+- **Networked AI** — Rewrote the single-player AI system to support networked multiplayer matches.
+- **Localization System** — Built localization infrastructure from scratch (Unity lacked built-in support at the time).
+- **VR Arcade Tooling** — Wrote external setup tool for VR arcades and configured game for arcade deployment.
 
 #### Context
 
-Futuristic VR pong game designed for arcade and home VR. One of my first shipped VR titles, developed during the early days of consumer VR.
+Futuristic VR pong for arcade and home VR. 3-month stint during the early days of consumer VR.
 
 </div>
 </div>
@@ -154,20 +192,25 @@ Futuristic VR pong game designed for arcade and home VR. One of my first shipped
 
 ### Eden
 
-A personal game engine built for applied research and deep systems exploration. Seven years of active development across rendering, ECS, asset pipelines, and tooling.
+Personal game engine. 7 years, 75+ crates, built almost entirely solo before AI coding tools existed. Ground-up systems exploration.
 
 <div class="card-details" markdown>
 
 #### Highlights
 
-- **Custom ECS** — Data-oriented entity component system with compile-time archetype queries
-- **Vulkan Renderer** — Modern rendering architecture with bindless resources and GPU-driven culling
-- **Asset Pipeline** — Hot-reloading asset system with dependency tracking and incremental builds
-- **EFX Shader Language** — Custom shading language transpiling to HLSL/SPIR-V with effect composition
+- **Custom ECS** - Data-oriented entity component system with runtime archetype queries.
+- **Vulkan Renderer** - GPU-driven rendering architecture with bindless resources.
+- **Asset System** - Thread-safe objects-with-properties system with hot-reloading and incremental compilation.
+- **EFX Shader Language** - Metalanguage on top of HLSL providing structure and heavy codegen for shader authoring.
+- **Silk UI Framework** - Custom reactive UI framework built from scratch.
 
-#### Technical Focus
+#### Scope
 
-Built from scratch in Rust with deep dives into memory allocation, job systems, and GPU programming. The engine serves as a testbed for exploring systems programming concepts at a level commercial engines often abstract away.
+75+ crates covering a custom standard library, math, platform abstractions, job system and threading primitives, serialization (including custom binary format), virtual file system, build tooling, and more.
+
+#### Why
+
+Understanding engines at a level most developers never want or need to. When you've built the entire stack yourself, debugging someone else's becomes a lot easier. Strong opinions, formed by actually building instead of just using.
 
 </div>
 </div>

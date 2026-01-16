@@ -181,8 +181,12 @@ function initCards() {
         const targetLeft = placeholderRect.left - contentRect.left;
 
         // Get banner elements for height control
-        const banner = card.querySelector('.card-banner, .card-banner-eden');
+        const banner = card.querySelector('.card-banner, .card-banner-eden, .card-banner-placeholder');
         const bannerWrapper = card.querySelector(':scope > p:first-child');
+
+        // Capture current banner height before removing expanded class
+        const bannerTarget = banner || bannerWrapper;
+        const expandedBannerHeight = bannerTarget ? bannerTarget.getBoundingClientRect().height : 228;
 
         // Move card to content and use absolute positioning first
         content.style.position = 'relative';
@@ -195,12 +199,12 @@ function initCards() {
 
         // Keep banner at expanded height initially
         if (banner) {
-            banner.style.setProperty('height', '228px', 'important');
-            banner.style.setProperty('min-height', '228px', 'important');
+            banner.style.setProperty('height', expandedBannerHeight + 'px', 'important');
+            banner.style.setProperty('min-height', expandedBannerHeight + 'px', 'important');
         }
         if (bannerWrapper) {
-            bannerWrapper.style.setProperty('height', '228px', 'important');
-            bannerWrapper.style.setProperty('min-height', '228px', 'important');
+            bannerWrapper.style.setProperty('height', expandedBannerHeight + 'px', 'important');
+            bannerWrapper.style.setProperty('min-height', expandedBannerHeight + 'px', 'important');
         }
 
         // Trigger collapse
@@ -273,7 +277,7 @@ function initCards() {
             card.classList.remove('collapsing');
 
             // Clean up banner inline styles
-            const banner = card.querySelector('.card-banner, .card-banner-eden');
+            const banner = card.querySelector('.card-banner, .card-banner-eden, .card-banner-placeholder');
             const bannerWrapper = card.querySelector(':scope > p:first-child');
             if (banner) {
                 banner.style.removeProperty('height');
@@ -491,6 +495,7 @@ function initCards() {
                 // Only collapse if clicking banner or close button
                 const clickedBanner = e.target.closest('.card-banner') ||
                                       e.target.closest('.card-banner-eden') ||
+                                      e.target.closest('.card-banner-placeholder') ||
                                       e.target.closest('.card-close');
                 if (clickedBanner) {
                     collapseAll();
