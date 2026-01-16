@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initFavicon() {
-    const darkIcon = 'images/favicon-dark.svg';
-    const lightIcon = 'images/favicon-light.svg';
+    const darkIcon = 'images/icon/logo-circle-dark.svg';
+    const lightIcon = 'images/icon/logo-circle-light.svg';
 
     function updateFavicon() {
         const scheme = document.body.getAttribute('data-md-color-scheme');

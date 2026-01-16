@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  <link rel="icon" href="{{ 'images/favicon-light.svg' | url }}" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="{{ 'images/favicon-dark.svg' | url }}" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="{{ 'images/favicon-dark.svg' | url }}">
+  <link rel="icon" href="{{ 'images/icon/logo-circle-light.svg' | url }}" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="{{ 'images/icon/logo-circle-dark.svg' | url }}" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="{{ 'images/icon/logo-circle-dark.svg' | url }}">
+{% endblock %}
+
+{% block tabs %}
+  {% if "navigation.tabs.sticky" not in features %}
+    {% if "navigation.tabs.merged" not in features %}
+      {% if "navigation.tabs" in features %}
+        {% include "partials/tabs.html" %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
 {% endblock %}

@@ -1,4 +1,4 @@
-site_name: 0ms
+site_name: Techgeek1
 site_url: https://techgeek1.dev
 site_description: Senior Software Engineer - Systems architecture, performance, and the foundational work that makes scale possible.
 copyright: Copyright (C) 2025 Austin Rife
@@ -30,6 +30,8 @@ theme:
   features:
     - navigation.instant
     - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.merged
     - content.code.copy
     - toc.integrate
 
@@ -65,4 +67,5 @@ markdown_extensions:
 plugins: []
 
 nav:
-  - About: index.md
+  - Home: index.md
+  - About: about.md

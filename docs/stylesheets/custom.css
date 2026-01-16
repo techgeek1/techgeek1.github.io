@@ -1,3 +1,40 @@
+/* Merged tabs - put nav tabs inline with header */
+.md-header__title {
+    width: fit-content;
+    min-width: 6rem;
+}
+
+.md-header__inner .md-tabs {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: inherit;
+    background: transparent;
+    pointer-events: none;
+}
+
+.md-header__inner .md-tabs .md-tabs__list {
+    justify-content: center;
+    pointer-events: auto;
+}
+
+@media screen and (min-width: 60em) and (max-width:76.234375em) {
+    [data-md-toggle=search]:checked~.md-header .md-search__inner {
+        width: 23rem;
+    }
+}
+
+@media screen and (min-width: 76.25em) {
+    [data-md-toggle=search]:checked~.md-header .md-search__inner {
+        width: 33rem;
+    }
+}
+
+/* Reserve scrollbar space to prevent layout shift */
+html {
+    scrollbar-gutter: stable;
+}
+
 /* Override mkdocs-material's aggressive font scaling */
 @media screen and (min-width: 100em) {
     html {
@@ -17,6 +54,8 @@
     --surface-base: #e4e4e6;
     --surface-container: #d8d8da;
     --surface-card: #ccccce;
+    --nav-hover: #d2d2d4;
+    --nav-pressed: #dedee0;
 
     /* Dark text on light */
     --text-high: rgba(0, 0, 0, 0.87);
@@ -24,7 +63,7 @@
     --text-disabled: rgba(0, 0, 0, 0.38);
 
     /* Accent - Eden blue */
-    --accent: #338EC4;
+    --accent: #1a5276;
 
     /* Page backgrounds */
     --md-default-bg-color: var(--surface-container);
@@ -62,10 +101,12 @@
 
 /* Dark theme */
 [data-md-color-scheme="slate"] {
-    /* Cool dark surfaces */
+    /* Cool dark surfaces - 12-step delta */
     --surface-base: #121212;
     --surface-container: #1e1e1e;
     --surface-card: #2a2a2a;
+    --nav-hover: #242424;
+    --nav-pressed: #181818;
 
     /* Light text on dark */
     --text-high: rgba(255, 255, 255, 0.95);
@@ -73,7 +114,7 @@
     --text-disabled: rgba(255, 255, 255, 0.38);
 
     /* Accent - Eden blue */
-    --accent: #5AA3CF;
+    --accent: #2e86ab;
 
     /* Page backgrounds */
     --md-default-bg-color: var(--surface-container);
@@ -118,10 +159,6 @@
     }
 }
 
-/* TODO: Remove when blog is added */
-.md-header__button[for="__drawer"] {
-    display: none;
-}
 
 /* Mobile drawer fixes - override mkdocs-material's hardcoded 242px */
 @media (max-width: 76.1875em) {
@@ -150,6 +187,41 @@
 /* Hide sidebar title - logo is in header instead */
 .md-nav--primary > .md-nav__title {
     display: none;
+}
+
+/* Mobile sidebar nav styling */
+.md-nav--primary .md-nav__item {
+    border: none;
+}
+
+.md-nav--primary .md-nav__link {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    transition: background 0.15s ease;
+    color: var(--text-high) !important;
+}
+
+.md-nav--primary .md-nav__link:hover {
+    background: var(--nav-hover);
+}
+
+.md-nav--primary .md-nav__link:active {
+    background: var(--nav-pressed);
+}
+
+.md-nav--primary .md-nav__link--active,
+.md-nav--primary .md-nav__link--active:is(:focus, :hover) {
+    background: color-mix(in srgb, var(--md-accent-fg-color) 15%, transparent);
+    color: var(--text-high) !important;
+}
+
+.md-nav--primary .md-nav__link--active:hover {
+    background: color-mix(in srgb, var(--md-accent-fg-color) 20%, transparent);
+}
+
+.md-nav--primary .md-nav__link--active:active {
+    background: color-mix(in srgb, var(--md-accent-fg-color) 10%, transparent);
 }
 
 
@@ -937,6 +1009,88 @@ body.card-expanded .md-container {
 
 [data-md-color-scheme="default"] .contact-link:active {
     background: #b8b8ba;
+}
+
+/* Landing page */
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--md-toolbar-height, 48px) - 100px);
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Hide auto-generated title on landing page */
+.md-content:has(.landing) h1 {
+    display: none !important;
+}
+
+.md-typeset .landing-logo {
+    width: 200px !important;
+    height: 200px !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin-bottom: 1.5rem;
+}
+
+
+/* Theme-aware logo visibility - inverted for contrast */
+[data-md-color-scheme="slate"] .landing-logo--light {
+    display: block;
+}
+
+[data-md-color-scheme="slate"] .landing-logo--dark {
+    display: none;
+}
+
+[data-md-color-scheme="default"] .landing-logo--light {
+    display: none;
+}
+
+[data-md-color-scheme="default"] .landing-logo--dark {
+    display: block;
+}
+
+.landing-tagline {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    max-width: 400px;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.landing-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.landing-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #fff !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+.landing-link:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--md-shadow-z1);
+    filter: brightness(1.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+.landing-link:active {
+    transform: translateY(0);
+    box-shadow: none;
+    filter: brightness(0.9);
 }
 
 /* Reduced motion for accessibility */
