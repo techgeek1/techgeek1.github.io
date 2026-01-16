@@ -23,8 +23,8 @@
     --text-medium: rgba(0, 0, 0, 0.60);
     --text-disabled: rgba(0, 0, 0, 0.38);
 
-    /* Accent */
-    --accent: #1976d2;
+    /* Accent - Eden blue */
+    --accent: #338EC4;
 
     /* Page backgrounds */
     --md-default-bg-color: var(--surface-container);
@@ -72,8 +72,8 @@
     --text-medium: rgba(255, 255, 255, 0.70);
     --text-disabled: rgba(255, 255, 255, 0.38);
 
-    /* Accent */
-    --accent: #82b1ff;
+    /* Accent - Eden blue */
+    --accent: #5AA3CF;
 
     /* Page backgrounds */
     --md-default-bg-color: var(--surface-container);
@@ -110,10 +110,70 @@
 }
 
 
-/* Hide both sidebars */
-.md-sidebar--primary,
-.md-sidebar--secondary {
-    display: none !important;
+/* Hide sidebars on desktop only - mobile drawer still works for nav */
+@media (min-width: 76.25em) {
+    .md-sidebar--primary,
+    .md-sidebar--secondary {
+        display: none !important;
+    }
+}
+
+/* TODO: Remove when blog is added */
+.md-header__button[for="__drawer"] {
+    display: none;
+}
+
+/* Mobile drawer fixes - override mkdocs-material's hardcoded 242px */
+@media (max-width: 76.1875em) {
+    .md-sidebar--primary {
+        width: 66vw !important;
+        max-width: none !important;
+        left: 0 !important;
+        inset-inline-start: 0 !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+        transform: translateX(0) !important;
+    }
+}
+
+.md-nav--primary {
+    /* Start below header, extend to bottom using dynamic viewport */
+    top: var(--md-toolbar-height, 48px) !important;
+    bottom: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+}
+
+/* Hide sidebar title - logo is in header instead */
+.md-nav--primary > .md-nav__title {
+    display: none;
+}
+
+
+/* Overlay should also use dynamic positioning */
+.md-overlay {
+    top: var(--md-toolbar-height, 48px) !important;
+    bottom: 0 !important;
+    height: auto !important;
+    z-index: 3 !important;
+}
+
+/* Lock scroll when drawer is open */
+html:has(#__drawer:checked) {
+    overflow: hidden !important;
+}
+
+html:has(#__drawer:checked) body {
+    overflow: hidden !important;
+    touch-action: none;
+}
+
+#__drawer:checked ~ .md-container .md-sidebar--primary {
+    touch-action: auto;
+    overscroll-behavior: contain;
 }
 
 /* Center content column */
@@ -222,6 +282,28 @@ body.card-expanded .md-container {
     background-color: var(--md-footer-bg-color--dark);
 }
 
+/* Prevent footer from stacking on mobile */
+.md-footer-meta__inner {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+}
+
+.md-copyright {
+    font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+    .md-footer-meta__inner {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+
+    .md-social {
+        margin: 0;
+    }
+}
+
 /* Rounded corners */
 .md-typeset pre > code {
     border-radius: 6px;
@@ -263,6 +345,7 @@ body.card-expanded .md-container {
     display: flex;
     flex-direction: column;
     max-height: 380px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .card:hover:not(.expanded):not(.collapsing) {
@@ -270,9 +353,16 @@ body.card-expanded .md-container {
     box-shadow: var(--md-shadow-z2);
 }
 
+.card:focus-visible {
+    outline: 2px solid var(--md-accent-fg-color);
+    outline-offset: 2px;
+}
+
 /* Card banner wrapper - in case mkdocs wraps img */
 .card > p:first-child,
-.card > p:first-child > img {
+.card > p:first-child > img,
+.card > p:first-child > picture,
+.card > p:first-child > picture > img {
     margin: 0 !important;
     padding: 0 !important;
     display: block !important;
@@ -412,6 +502,8 @@ body.card-expanded .md-container {
 /* Expanded banner height */
 .card.expanded > p:first-child,
 .card.expanded > p:first-child > img,
+.card.expanded > p:first-child > picture,
+.card.expanded > p:first-child > picture > img,
 .card.expanded .card-banner {
     height: 228px !important;
     min-height: 228px !important;
@@ -432,6 +524,8 @@ body.card-expanded .md-container {
 /* Banner height during collapse - controlled by JS, just define transition */
 .card.collapsing > p:first-child,
 .card.collapsing > p:first-child > img,
+.card.collapsing > p:first-child > picture,
+.card.collapsing > p:first-child > picture > img,
 .card.collapsing .card-banner {
     transition: height 0.25s ease, min-height 0.25s ease, max-height 0.25s ease !important;
 }
@@ -444,6 +538,7 @@ body.card-expanded .md-container {
 .card.collapsing .card-content {
     flex: 1;
     overflow-y: auto;
+    overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     transition: scrollbar-color 0.3s ease;
@@ -618,23 +713,6 @@ body.card-expanded .md-container {
     background: rgba(0, 0, 0, 0.7);
 }
 
-/* Scroll indicator for expanded card content */
-.card.expanded .card-content::after {
-    content: '';
-    position: sticky;
-    bottom: 0;
-    display: block;
-    height: 40px;
-    margin-top: -40px;
-    background: linear-gradient(to bottom, transparent, var(--surface-card));
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.card.expanded .card-content.has-overflow::after {
-    opacity: 1;
-}
 
 /* Hero section */
 .hero {
@@ -649,6 +727,28 @@ body.card-expanded .md-container {
     background-position: center;
 }
 
+/* Mobile hero fix */
+@media (max-width: 768px) {
+    .hero {
+        padding: 6rem 1.5rem 7rem;
+    }
+
+    /* Prevent horizontal overflow from 100vw hero on mobile */
+    .md-content {
+        overflow-x: clip;
+    }
+
+}
+
+/* Taller expanded cards on phones - match side margins (5% each) */
+@media (max-width: 768px) and (aspect-ratio < 3/4) {
+    .card.expanded {
+        top: calc(var(--md-toolbar-height, 48px) + 5dvh) !important;
+        bottom: 5dvh !important;
+        height: auto !important;
+    }
+}
+
 .hero::before,
 .hero::after {
     content: '';
@@ -660,13 +760,13 @@ body.card-expanded .md-container {
 }
 
 .hero::before {
-    background-image: url('../images/hero-dark.png');
+    background-image: url('../images/hero-dark.webp');
     background-color: rgba(0, 0, 0, 0.4);
     background-blend-mode: darken;
 }
 
 .hero::after {
-    background-image: url('../images/hero-light.png');
+    background-image: url('../images/hero-light.webp');
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: darken;
 }
@@ -696,6 +796,7 @@ body.card-expanded .md-container {
 
 .hero h1 {
     margin-bottom: 0.5rem;
+    font-weight: 700;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -836,5 +937,24 @@ body.card-expanded .md-container {
 
 [data-md-color-scheme="default"] .contact-link:active {
     background: #b8b8ba;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .card:hover:not(.expanded):not(.collapsing) {
+        transform: none;
+    }
+
+    .contact-link:hover {
+        transform: none;
+    }
 }
 

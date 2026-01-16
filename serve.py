@@ -39,6 +39,9 @@ if __name__ == '__main__':
     for path in WATCH_PATHS:
         server.watch(str(path), build, delay=2)
 
-    print(f"\n[server] http://127.0.0.1:{PORT}")
+    import socket
+    local_ip = socket.gethostbyname(socket.gethostname())
+    print(f"\n[server] Local:   http://127.0.0.1:{PORT}")
+    print(f"[server] Network: http://{local_ip}:{PORT}")
     print("[server] Live reload enabled - browser will refresh on changes")
-    server.serve(root=str(SITE_DIR), port=PORT, host='127.0.0.1')
+    server.serve(root=str(SITE_DIR), port=PORT, host='0.0.0.0')

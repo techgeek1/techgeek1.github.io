@@ -32,7 +32,10 @@ I'm drawn to problems that reward careful thinking: compilers, graphics pipeline
 <div class="card-grid" markdown>
 
 <div class="card" data-card-id="asgards-wrath-2" markdown>
-<img class="card-banner" src="images/asgards-wrath-2.jpg" alt="Asgard's Wrath 2">
+<picture>
+  <source srcset="images/asgards-wrath-2.webp" type="image/webp">
+  <img class="card-banner" src="images/asgards-wrath-2.jpg" alt="Asgard's Wrath 2">
+</picture>
 <span class="card-year">2023</span>
 <div class="card-content" markdown>
 
@@ -59,7 +62,10 @@ Shipped 2023 at Meta. Contributed Blueprint VM optimizations (~50% execution tim
 </div>
 
 <div class="card" data-card-id="asgards-wrath" markdown>
-<img class="card-banner" src="images/asgards-wrath.jpg" alt="Asgard's Wrath">
+<picture>
+  <source srcset="images/asgards-wrath.webp" type="image/webp">
+  <img class="card-banner" src="images/asgards-wrath.jpg" alt="Asgard's Wrath">
+</picture>
 <span class="card-year">2019</span>
 <div class="card-content" markdown>
 
@@ -85,7 +91,10 @@ Award-winning VR action RPG that set a new standard for depth and polish in VR g
 </div>
 
 <div class="card" data-card-id="marvel-powers-united" markdown>
-<img class="card-banner" src="images/marvel-powers-united.jpg" alt="Marvel Powers United VR">
+<picture>
+  <source srcset="images/marvel-powers-united.webp" type="image/webp">
+  <img class="card-banner" src="images/marvel-powers-united.jpg" alt="Marvel Powers United VR" loading="lazy">
+</picture>
 <span class="card-year">2018</span>
 <div class="card-content" markdown>
 
@@ -111,7 +120,10 @@ Cooperative VR brawler letting players embody Marvel superheroes. 4-player onlin
 </div>
 
 <div class="card" data-card-id="cyberpong" markdown>
-<img class="card-banner card-banner--top-15" src="images/cyberpong.jpg" alt="Cyberpong">
+<picture>
+  <source srcset="images/cyberpong.webp" type="image/webp">
+  <img class="card-banner card-banner--top-15" src="images/cyberpong.jpg" alt="Cyberpong" loading="lazy">
+</picture>
 <span class="card-year">2016</span>
 <div class="card-content" markdown>
 

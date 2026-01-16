@@ -1,11 +1,78 @@
 // Site initialization
 document.addEventListener('DOMContentLoaded', () => {
+    // Update copyright year
+    const copyright = document.querySelector('.md-copyright');
+    if (copyright) {
+        copyright.innerHTML = copyright.innerHTML.replace(/\d{4}/, new Date().getFullYear());
+    }
+
+    // Theme-aware favicon (matches site toggle, not OS)
+    initFavicon();
+
     // Add social icons to header
     initHeaderSocials();
 
     // Initialize card system
     initCards();
+
+    // Initialize drawer swipe gestures
+    initDrawerSwipe();
 });
+
+function initFavicon() {
+    const darkIcon = 'images/favicon-dark.svg';
+    const lightIcon = 'images/favicon-light.svg';
+
+    function updateFavicon() {
+        const scheme = document.body.getAttribute('data-md-color-scheme');
+        const icon = scheme === 'slate' ? darkIcon : lightIcon;
+
+        // Remove all existing favicons
+        document.querySelectorAll('link[rel="icon"]').forEach(el => el.remove());
+
+        // Create fresh favicon link
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.href = icon;
+        document.head.appendChild(link);
+    }
+
+    // Initial update
+    updateFavicon();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateFavicon);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+}
+
+function initDrawerSwipe() {
+    const drawer = document.getElementById('__drawer');
+    if (!drawer) return;
+
+    const swipeThreshold = 50; // min px to trigger swipe
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', (e) => {
+        if (!drawer.checked) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        if (!drawer.checked) return;
+
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+
+        // Swipe left to close (must be more horizontal than vertical)
+        if (deltaX < -swipeThreshold && Math.abs(deltaX) > deltaY) {
+            drawer.checked = false;
+        }
+    }, { passive: true });
+}
 
 function initHeaderSocials() {
     const header = document.querySelector('.md-header__inner');
@@ -34,7 +101,8 @@ function initHeaderSocials() {
         link.rel = 'noopener noreferrer';
         link.className = 'md-header__button';
         link.title = label;
-        link.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`;
+        link.setAttribute('aria-label', label);
+        link.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${svg}</svg>`;
         container.appendChild(link);
     });
 
@@ -72,6 +140,7 @@ function initCards() {
     let placeholder = null;
     let originalRect = null;
     let isNavigatingBack = false;
+    let previouslyFocusedElement = null;
 
     // Add gradient overlays and move year pills into each card's banner
     cards.forEach(card => {
@@ -143,10 +212,16 @@ function initCards() {
             backdrop.classList.add('fading');
         }
 
-        // Remove scroll listener and re-enable body scroll immediately
+        // Remove scroll/touch listeners and re-enable body scroll immediately
         window.removeEventListener('wheel', onScrollOutside, { passive: false });
+        document.removeEventListener('touchstart', onTouchStart, { passive: true });
+        document.removeEventListener('touchmove', onTouchMove, { passive: false });
+        document.removeEventListener('keydown', handleFocusTrap);
         document.body.style.overflow = '';
         document.body.classList.remove('card-expanded');
+
+        // Update ARIA state
+        card.setAttribute('aria-expanded', 'false');
 
         // Clear URL hash for deep linking
         if (!isNavigatingBack && window.location.hash) {
@@ -197,12 +272,6 @@ function initCards() {
             card.style.zIndex = '';
             card.classList.remove('collapsing');
 
-            // Remove scroll indicator class
-            const cardContent = card.querySelector('.card-content');
-            if (cardContent) {
-                cardContent.classList.remove('has-overflow');
-            }
-
             // Clean up banner inline styles
             const banner = card.querySelector('.card-banner, .card-banner-eden');
             const bannerWrapper = card.querySelector(':scope > p:first-child');
@@ -223,30 +292,60 @@ function initCards() {
 
             expandedCard = null;
             originalRect = null;
+
+            // Restore focus
+            if (previouslyFocusedElement) {
+                previouslyFocusedElement.focus();
+                previouslyFocusedElement = null;
+            }
         }, 400);
     }
 
     function onScrollOutside(e) {
         if (!expandedCard) return;
 
+        const isInsideContent = e.target.closest('.card-content');
+
+        if (!isInsideContent) {
+            // Scrolling outside card content - dismiss
+            e.preventDefault();
+            document.body.style.overflow = '';
+            collapseAll();
+        }
+        // Inside card content - let browser handle naturally, CSS overscroll-behavior prevents propagation
+    }
+
+    // Touch handling for mobile - prevent page scroll when at card content limits
+    let lastTouchY = 0;
+
+    function onTouchStart(e) {
+        lastTouchY = e.touches[0].clientY;
+    }
+
+    function onTouchMove(e) {
+        if (!expandedCard) return;
+
         const cardContent = expandedCard.querySelector('.card-content');
         const isInsideContent = e.target.closest('.card-content');
 
-        if (isInsideContent && cardContent) {
-            // Check if at scroll limits
-            const atTop = cardContent.scrollTop <= 0 && e.deltaY < 0;
-            const atBottom = cardContent.scrollTop + cardContent.clientHeight >= cardContent.scrollHeight && e.deltaY > 0;
+        if (!isInsideContent) {
+            // Outside card content - prevent page scroll
+            e.preventDefault();
+            return;
+        }
 
-            if (atTop || atBottom) {
-                // At limits - re-enable body scroll immediately so this scroll goes through
-                document.body.style.overflow = '';
-                collapseAll();
+        if (cardContent) {
+            const touchY = e.touches[0].clientY;
+            const deltaY = lastTouchY - touchY; // positive = scrolling down, negative = scrolling up
+            lastTouchY = touchY;
+
+            const atTop = cardContent.scrollTop <= 0;
+            const atBottom = cardContent.scrollTop + cardContent.clientHeight >= cardContent.scrollHeight - 1;
+
+            // Prevent page scroll when at limits
+            if ((atTop && deltaY < 0) || (atBottom && deltaY > 0)) {
+                e.preventDefault();
             }
-            // Otherwise allow scrolling inside card content
-        } else {
-            // Scrolling outside card content - re-enable body scroll immediately so this scroll goes through
-            document.body.style.overflow = '';
-            collapseAll();
         }
     }
 
@@ -254,6 +353,10 @@ function initCards() {
         if (expandedCard) return;
 
         expandedCard = card;
+
+        // Save focus for restoration and update ARIA
+        previouslyFocusedElement = document.activeElement;
+        card.setAttribute('aria-expanded', 'true');
 
         // Get current position
         const rect = card.getBoundingClientRect();
@@ -318,24 +421,59 @@ function initCards() {
 
         // Add scroll listener to dismiss (passive: false to allow preventDefault)
         window.addEventListener('wheel', onScrollOutside, { passive: false });
+        document.addEventListener('touchstart', onTouchStart, { passive: true });
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+
+        // Add focus trap
+        document.addEventListener('keydown', handleFocusTrap);
 
         // Show scrollbar after transition (150ms fade + 250ms move)
         setTimeout(() => {
             card.classList.remove('transitioning');
 
-            // Check for content overflow to show scroll indicator
-            const cardContent = card.querySelector('.card-content');
-            if (cardContent && cardContent.scrollHeight > cardContent.clientHeight) {
-                cardContent.classList.add('has-overflow');
+            // Focus the close button for accessibility
+            const closeBtn = card.querySelector('.card-close');
+            if (closeBtn) {
+                closeBtn.focus();
             }
         }, 400);
     }
 
+    // Focus trap for expanded card
+    function handleFocusTrap(e) {
+        if (!expandedCard || e.key !== 'Tab') return;
+
+        const focusableEls = expandedCard.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstEl = focusableEls[0];
+        const lastEl = focusableEls[focusableEls.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+        } else if (!e.shiftKey && document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+        }
+    }
+
     cards.forEach(card => {
+        // Get card title for ARIA label
+        const titleEl = card.querySelector('.card-content h3');
+        const title = titleEl ? titleEl.textContent.trim() : 'Project card';
+
+        // Setup ARIA attributes
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-expanded', 'false');
+        card.setAttribute('aria-label', `${title}. Click to expand.`);
+
         // Close button
         const closeBtn = card.querySelector('.card-close');
         if (closeBtn) {
             closeBtn.title = 'Close';
+            closeBtn.setAttribute('aria-label', 'Close');
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 collapseAll();
@@ -359,6 +497,16 @@ function initCards() {
                 }
             } else {
                 expandCard(card);
+            }
+        });
+
+        // Keyboard activation (Enter/Space)
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (!card.classList.contains('expanded')) {
+                    e.preventDefault();
+                    expandCard(card);
+                }
             }
         });
     });

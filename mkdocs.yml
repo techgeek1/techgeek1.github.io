@@ -1,6 +1,7 @@
-site_name: Austin Rife
+site_name: 0ms
 site_url: https://techgeek1.dev
 site_description: Senior Software Engineer - Systems architecture, performance, and the foundational work that makes scale possible.
+copyright: Copyright (C) 2025 Austin Rife
 
 theme:
   name: material
